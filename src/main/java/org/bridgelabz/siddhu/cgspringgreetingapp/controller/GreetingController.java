@@ -13,6 +13,8 @@ public class GreetingController {
         this.greetingService = greetingService;
     }
 
+
+    // UC 1 - CRUD operation to get greeting
     @GetMapping
     public Greeting greeting(@RequestParam(value =  "name", defaultValue =  "World") String name){
         return greetingService.createGreeting(name);
@@ -34,5 +36,12 @@ public class GreetingController {
         return "Greeting for "+name+" has been deleted";
     }
 
+
+
+    // UC2 - return simple greeting (Hello world)
+    @GetMapping("/simple")
+    public Greeting getSimpleGreeting(){
+        return greetingService.getSimpleGreeting();
+    }
 
 }
