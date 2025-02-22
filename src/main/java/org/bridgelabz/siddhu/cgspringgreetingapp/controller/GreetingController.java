@@ -31,7 +31,7 @@ public class GreetingController {
 
     }
 
-    @DeleteMapping("/name")
+    @DeleteMapping("/{name}")
     public String deleteGreeting(@PathVariable String name){
         return "Greeting for "+name+" has been deleted";
     }
