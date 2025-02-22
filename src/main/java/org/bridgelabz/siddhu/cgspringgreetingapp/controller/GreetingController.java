@@ -14,34 +14,18 @@ public class GreetingController {
     }
 
 
-    // UC 1 - CRUD operation to get greeting
     @GetMapping
-    public Greeting greeting(@RequestParam(value =  "name", defaultValue =  "World") String name){
-        return greetingService.createGreeting(name);
+    public Greeting greeting(
+            @RequestParam(value = "firstName", required = false) String firstName,
+            @RequestParam(value = "lastName", required = false) String lastName){
+        return greetingService.createGreeting(firstName,lastName);
     }
 
     @PostMapping
     public Greeting createGreeting(@RequestBody Greeting greeting){
-        return greetingService.createGreeting(greeting.getMessage());
-    }
-
-    @PutMapping("/{name}")
-    public Greeting updateGreeting(@PathVariable String name, @RequestBody Greeting newGreeting){
-        return new Greeting("Updated: "+newGreeting.getMessage()+" for "+name);
-
-    }
-
-    @DeleteMapping("/{name}")
-    public String deleteGreeting(@PathVariable String name){
-        return "Greeting for "+name+" has been deleted";
+        return greetingService.createGreeting(greeting.getFirstName(),greeting.getLastName());
     }
 
 
-
-    // UC2 - return simple greeting (Hello world)
-    @GetMapping("/simple")
-    public Greeting getSimpleGreeting(){
-        return greetingService.getSimpleGreeting();
-    }
 
 }
