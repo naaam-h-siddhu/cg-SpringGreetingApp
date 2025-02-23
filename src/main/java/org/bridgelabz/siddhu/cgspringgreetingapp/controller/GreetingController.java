@@ -37,4 +37,9 @@ public class GreetingController {
     public Greeting saveGreeting(@RequestBody Greeting greeting){
         return greetingRepository.save(greeting);
     }
+
+    @GetMapping("/{id}")
+    public Greeting getGreetingById(@PathVariable Long id){
+        return greetingRepository.findById(id).orElseThrow(()-> new RuntimeException("No message found with id "+id));
+    }
 }
