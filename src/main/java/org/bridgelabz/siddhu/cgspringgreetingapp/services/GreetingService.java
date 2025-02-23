@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GreetingService {
+    @Deprecated
     public Greeting createGreeting(String firstName,String lastName){
 
         String message;
