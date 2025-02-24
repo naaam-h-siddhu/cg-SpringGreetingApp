@@ -4,6 +4,8 @@ import org.bridgelabz.siddhu.cgspringgreetingapp.dto.Greeting;
 import org.bridgelabz.siddhu.cgspringgreetingapp.repository.GreetingRepository;
 import org.bridgelabz.siddhu.cgspringgreetingapp.services.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +36,8 @@ public class GreetingController {
 
     @Autowired
     private GreetingRepository greetingRepository;
-
+    @Autowired
+    private GreetingService greetingService;
     @PostMapping()
     public Greeting saveGreeting(@RequestBody Greeting greeting){
         return greetingRepository.save(greeting);
@@ -48,5 +51,13 @@ public class GreetingController {
     @GetMapping
     public List<Greeting> getAllGreeting(){
         return greetingRepository.findAll();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Greeting> editGreeting(@PathVariable Long id, @RequestBody Greeting newGreeting){
+        Greeting greeting = greetingService.updateGreeting(id,newGreeting.getMessage());
+        if(greeting == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(greeting,HttpStatus.OK);
     }
 }
