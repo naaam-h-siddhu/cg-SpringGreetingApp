@@ -32,10 +32,10 @@ public class Greeting{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Transient //will not be saved in database
-    private String first_name;
-    @Transient //will not be saved in database
-    private String last_name;
+//    @Transient //will not be saved in database
+//    private String first_name;
+//    @Transient //will not be saved in database
+//    private String last_name;
 
     private String message;
     public Greeting(){}
