@@ -6,6 +6,8 @@ import org.bridgelabz.siddhu.cgspringgreetingapp.services.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
@@ -41,5 +43,10 @@ public class GreetingController {
     @GetMapping("/{id}")
     public Greeting getGreetingById(@PathVariable Long id){
         return greetingRepository.findById(id).orElseThrow(()-> new RuntimeException("No message found with id "+id));
+    }
+
+    @GetMapping
+    public List<Greeting> getAllGreeting(){
+        return greetingRepository.findAll();
     }
 }
